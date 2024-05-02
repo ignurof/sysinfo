@@ -12,9 +12,8 @@ def init():
 
 
 def run(args):
-    unit = 'gb'
     if len(args) > 1 and args[1] != None:
-        unit = 'kb'
+        unit = args[1] 
     match args[0]:
         case 'total':
             [msg, result] = get_total(unit)
@@ -44,8 +43,8 @@ def parse_meminfo(value):
                 return list(filter(None, line.split(' ')))
 
 
-def convert_kb_to_gb(value):
-    return float(value) * 10**-6
+def convert(value, y):
+    return float(value) * y 
 
 
 def parse_input(user_input):
@@ -58,9 +57,15 @@ def get_total(flag):
     total = parse_meminfo('MemTotal')
     amount = float(total[1])
     unit = total[2]
-    if flag == 'gb':
-        amount = convert_kb_to_gb(amount)
+    if flag == 'g':
+        amount = convert(amount, 10**-6)
         unit = 'gb'
+    elif flag == 'k':
+        unit = 'kb'
+    elif flag == 'm':
+        amount = convert(amount, 10**-3)
+        unit = 'mb'
+
     return ['Total Memory: {:.2f} {:}'.format(amount, unit), 0] 
 
 
