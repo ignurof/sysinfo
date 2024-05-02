@@ -2,6 +2,11 @@ import sys
 
 
 def init():
+    if len(sys.argv) == 1:
+        [msg, result] = get_help()
+        print(msg)
+        return result
+
     args = sys.argv[1:]
     run(args)
 
@@ -12,11 +17,17 @@ def run(args):
             [msg, result] = get_total()
         case 'available':
             [msg, result] = get_available()
+        case 'help':
+            [msg, result] = get_help()
         case _:
             [msg, result] = handle_error(args[0])
 
     print(msg) 
     return result
+
+
+def get_help():
+    return ['This is some hlep', 0]
 
 
 def handle_error(arg):
@@ -42,10 +53,10 @@ def parse_input(user_input):
 
 
 def get_total():
-    total = parse_meminfo('MemTotal')
+    total = convert_kb_to_gb(parse_meminfo('MemTotal'))
     return [f'Total Memory: {total}', 0] 
 
 
 def get_available():
-    available = parse_meminfo('MemAvailable')
+    available = convert_kb_to_gb(parse_meminfo('MemAvailable'))
     return [f'Available Memory: {available}', 0] 
