@@ -14,6 +14,11 @@ class Test(unittest.TestCase):
     def test_handle_invalid_string(self):
         self.assertEqual(main.run(['blablab']), 1)
 
+    def test_convert_kb_to_gb(self):
+        self.assertEqual(main.convert_kb_to_gb(1024), 0.001024)
+        self.assertEqual(main.convert_kb_to_gb(1024000), 1.024)
+        self.assertEqual(main.convert_kb_to_gb(1000000), 1)
+
 
 if __name__ == '__main__':
     t = Test()
@@ -21,3 +26,4 @@ if __name__ == '__main__':
     t.test_available()
     t.test_handle_empty_string()
     t.test_handle_invalid_string()
+    t.test_convert_kb_to_gb()
