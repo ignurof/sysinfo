@@ -19,6 +19,9 @@ class Test(unittest.TestCase):
         self.assertEqual(main.convert_kb_to_gb(1024000), 1.024)
         self.assertEqual(main.convert_kb_to_gb(1000000), 1)
 
+    def test_parse_meminfo(self):
+        self.assertEqual(type(main.parse_meminfo('MemTotal')), type([]))
+
 
 if __name__ == '__main__':
     t = Test()
@@ -27,3 +30,4 @@ if __name__ == '__main__':
     t.test_handle_empty_string()
     t.test_handle_invalid_string()
     t.test_convert_kb_to_gb()
+    t.test_parse_meminfo()
