@@ -47,12 +47,6 @@ def convert(value, y):
     return float(value) * y 
 
 
-def parse_input(user_input):
-    for data in parse_meminfo():
-        if user_input in data[0]:
-            print('Key: {key} | Value: {value}'.format(key = data[0], value = data[1]))
-
-
 def get_total(flag):
     total = parse_meminfo('MemTotal')
     amount = float(total[1])
