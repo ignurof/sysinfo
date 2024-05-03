@@ -88,8 +88,8 @@ def get_total(flag):
 
 def get_available(flag):
     available = parse_meminfo('MemAvailable')
-    amount = float(total[1])
-    unit = total[2]
+    amount = float(available[1])
+    unit = available[2]
 
     [amount, unit] = handle_unit_conversion(amount, unit, flag)
 
