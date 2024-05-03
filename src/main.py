@@ -4,9 +4,6 @@ import colored
 def init():
     keep_app_active = True
     if len(sys.argv) == 1:
-        #[msg, result] = get_help()
-        #print(msg)
-        #return result
         while(keep_app_active):
             print('{fg}{bg}sysinfo by ignurof{reset}'.format(fg = colored.Fore.black, bg = colored.Back.white, reset = colored.Style.reset))
             print('Please choose your category first: meminfo ... ... more tbd')
