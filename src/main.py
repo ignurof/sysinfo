@@ -2,23 +2,38 @@ import sys
 
 
 def init():
+    keep_app_active = True
     if len(sys.argv) == 1:
-        [msg, result] = get_help()
-        print(msg)
-        return result
+        #[msg, result] = get_help()
+        #print(msg)
+        #return result
+        while(keep_app_active):
+            print('sysinfo by ignurof')
+            print('Please choose your category first: meminfo ... ... more tbd')
+            category_pick = input('Category: ')
+            if 'meminfo' in category_pick:
+                run(['total'])
 
-    args = sys.argv[1:]
-    run(args)
+            # restart interactive flow if user wants it
+            go_again = input('Go again? (y)es or (n)o: ')
+            if 'n' in go_again:
+                keep_app_active = False
+            elif 'n' not in go_again and 'y' not in go_again:
+                print('Invalid input! You can only use y or n')
+    elif len(sys.argv) >= 2:
+        args = sys.argv[1:]
+        run(args)
 
 
 def run(args):
+    flag = 'k'
     if len(args) > 1 and args[1] != None:
-        unit = args[1] 
+        flag = args[1] 
     match args[0]:
         case 'total':
-            [msg, result] = get_total(unit)
+            [msg, result] = get_total(flag)
         case 'available':
-            [msg, result] = get_available(unit)
+            [msg, result] = get_available(flag)
         case 'help':
             [msg, result] = get_help()
         case _:
@@ -29,7 +44,7 @@ def run(args):
 
 
 def get_help():
-    return ['This is some hlep', 0]
+    return ['Usage: python3 run.py total/available/help (optional secondary) k/m/b', 0]
 
 
 def handle_error(arg):
