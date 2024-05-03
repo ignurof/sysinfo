@@ -1,10 +1,6 @@
 # **sysinfo**
 ![sysinfo logo](assets/readme/logo.png "sysinfo logo")
 
-vad det är
-vad syftet är
-demografin
-
 sysinfo is a system informational command-line application that lets the user view and query different system info found on their local machine and the main purpose of the app is to help the users quickly get different important data they may need from their system, maybe straight from the command-line or piped through a different app that they are making.
 The main demographic of this app would be other developers and tech interested people that want to quickly grab some data about their RAM or otherwise.
 
