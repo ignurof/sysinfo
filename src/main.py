@@ -1,5 +1,5 @@
 import sys
-
+import colored
 
 def init():
     keep_app_active = True
@@ -8,15 +8,15 @@ def init():
         #print(msg)
         #return result
         while(keep_app_active):
-            print('sysinfo by ignurof')
+            print('{fg}{bg}sysinfo by ignurof{reset}'.format(fg = colored.Fore.black, bg = colored.Back.white, reset = colored.Style.reset))
             print('Please choose your category first: meminfo ... ... more tbd')
             category_loop = True
             while(category_loop):
-                category_pick = input('Category: ')
+                category_pick = input('{fg}Category{reset}: '.format(fg = colored.Fore.yellow, reset = colored.Style.reset))
                 if 'meminfo' in category_pick:
                     category_loop = False
-                    print('Now you can pick between "total" or "available".')
-                    print('You can also add a secondary flag of either "k" "m" "g".')
+                    print('Now you can pick between {fg}"total" or "available"{reset}.'.format(fg = colored.Fore.red, reset = colored.Style.reset))
+                    print('You can also add a secondary flag of either {fg}"k" "m" "g"{reset}.'.format(fg = colored.Fore.red, reset = colored.Style.reset))
                     choices_loop = True
                     while(choices_loop):
                         choices = input('Choice and (optional) flag: ').split(' ')
@@ -32,8 +32,10 @@ def init():
             go_again = input('Go again? (y)es or (n)o: ')
             if 'n' in go_again:
                 keep_app_active = False
-            elif 'n' not in go_again and 'y' not in go_again:
-                print('Invalid input! You can only use y or n')
+            elif 'y' in go_again:
+                pass
+            else:
+                print('Can only input y or n')
     elif len(sys.argv) >= 2:
         args = sys.argv[1:]
         run(args)
