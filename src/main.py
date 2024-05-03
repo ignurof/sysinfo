@@ -80,18 +80,31 @@ def get_total(flag):
     total = parse_meminfo('MemTotal')
     amount = float(total[1])
     unit = total[2]
-    if flag == 'g':
-        amount = convert(amount, 10**-6)
-        unit = 'gb'
-    elif flag == 'k':
-        unit = 'kb'
-    elif flag == 'm':
-        amount = convert(amount, 10**-3)
-        unit = 'mb'
+    
+    [amount, unit] = handle_unit_conversion(amount, unit, flag)
 
-    return ['Total Memory: {:.2f} {:}'.format(amount, unit), 0] 
+    return ['Total Memory: {:.2f} {:}'.format([amount, unit][0], [amount, unit][1]), 0] 
 
 
-def get_available():
+def get_available(flag):
     available = parse_meminfo('MemAvailable')
-    return [f'Available Memory: {available[1]} {available[2]}', 0] 
+    amount = float(total[1])
+    unit = total[2]
+
+    [amount, unit] = handle_unit_conversion(amount, unit, flag)
+
+    return ['Available Memory: {:.2f} {:}'.format([amount, unit][0], [amount, unit][1]), 0] 
+
+
+def handle_unit_conversion(amount, unit, flag):
+    if flag == 'g':
+        a = convert(amount, 10**-6)
+        u = 'gb'
+        return [a, u]
+    elif flag == 'k':
+        u = 'kb'
+        return [amount, u]
+    elif flag == 'm':
+        a = convert(amount, 10**-3)
+        u = 'mb'
+        return [a, u]
