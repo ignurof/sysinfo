@@ -10,9 +10,23 @@ def init():
         while(keep_app_active):
             print('sysinfo by ignurof')
             print('Please choose your category first: meminfo ... ... more tbd')
-            category_pick = input('Category: ')
-            if 'meminfo' in category_pick:
-                run(['total'])
+            category_loop = True
+            while(category_loop):
+                category_pick = input('Category: ')
+                if 'meminfo' in category_pick:
+                    category_loop = False
+                    print('Now you can pick between "total" or "available".')
+                    print('You can also add a secondary flag of either "k" "m" "g".')
+                    choices_loop = True
+                    while(choices_loop):
+                        choices = input('Choice and (optional) flag: ').split(' ')
+                        if 'total' in choices[0] or 'available' in choices[0]:
+                            choices_loop = False
+                            run(choices)
+                        else:
+                            print(handle_error(choices))
+                else:
+                    print(handle_error(category_pick))
 
             # restart interactive flow if user wants it
             go_again = input('Go again? (y)es or (n)o: ')
@@ -47,7 +61,7 @@ def get_help():
     return ['Usage: python3 run.py total/available/help (optional secondary) k/m/b', 0]
 
 
-def handle_error(arg):
+def handle_error(args):
     return ['error', 1]
 
 
